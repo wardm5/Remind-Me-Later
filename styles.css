@@ -3,20 +3,16 @@
   margin: 0;
   padding: 0;
 }
-
 body {
   background-color: #ffd54f;
 }
-
 .container {
   color: #333;
   text-align: center;
 }
-
 h1 {
   font-weight: normal;
 }
-
 li {
   display: inline-block;
   font-size: 1.5em;
@@ -24,19 +20,15 @@ li {
   padding: 1em;
   text-transform: uppercase;
 }
-
 li span {
   display: block;
   font-size: 4.5rem;
 }
-
-
 /* general styling */
 html, body {
   height: 100%;
   margin: 0;
 }
-
 body {
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -54,7 +46,6 @@ body {
     "Helvetica Neue",
     sans-serif;
 }
-
 .container {
   margin: 0 auto;
 }

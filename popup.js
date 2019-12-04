@@ -1,32 +1,27 @@
-// document.addEventListener('DOMContentLoaded', function() {
-//   var checkPageButton = document.getElementById('checkPage');
-//   var startTimerButton = document.getElementById('startTimer');
-//   var endTimerButton = document.getElementById('endTimer');
-//   checkPageButton.addEventListener('click', function() {
-//     chrome.tabs.getSelected(null, function(tab) {
-//         alert("hello");
-//     });
-//   }, false);
-//
-//   // start timer button
-//   startTimerButton.addEventListener('click', function() {
-//     chrome.tabs.getSelected(null, function(tab) {
-//         alert("start");
-//     });
-//   }, false);
-//
-//   // end timer button
-//   endTimerButton.addEventListener('click', function() {
-//     chrome.tabs.getSelected(null, function(tab) {
-//         alert("end");
-//     });
-//   }, false);
-// }, false);
-
 const second = 1000,
       minute = second * 60,
       hour = minute * 60,
       day = hour * 24;
+
+document.addEventListener('DOMContentLoaded', function() {
+  var startTimerButton = document.getElementById('startTimer');
+  var endTimerButton = document.getElementById('endTimer');
+
+  // start timer button
+  startTimerButton.addEventListener('click', function() {
+    chrome.tabs.getSelected(null, function(tab) {
+        alert("start");
+    });
+  }, false);
+
+  // end timer button
+  endTimerButton.addEventListener('click', function() {
+    chrome.tabs.getSelected(null, function(tab) {
+        alert("end");
+    });
+  }, false);
+}, false);
+
 let countDown = new Date('Sep 30, 2020 00:00:00').getTime(),  // set this
     x = setInterval(function() {
       let now = new Date().getTime(),
