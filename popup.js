@@ -1,10 +1,14 @@
 // var deadline = new Date(Date.parse(new Date()) + 1 * 0 * 0 * 0 * 1000);
 var deadline = new Date(Date.parse(new Date()) + 1 * 2 * 60 * 60 * 1000);
-initializeClock2('clockdiv', deadline);
+initializeToZero('clockdiv', deadline);
 var storage = chrome.storage.local;
 var storedJSONDate;
 var testdate;
 
+chrome.runtime.getBackgroundPage(function (backgroundPage) {
+    console.log(backgroundPage.cow); // Displays "mooh".
+});
+// showPopup();
 document.addEventListener('DOMContentLoaded', function() {
   var startTimerButton = document.getElementById('startTimer');
   var endTimerButton = document.getElementById('endTimer');
@@ -16,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initializeClock('clockdiv', deadline);
         var test = 'hello';
         var curr = deadline.toJSON();
-        chrome.storage.local.set({'misha': curr}, function() {
+        chrome.storage.sync.set({'misha': curr}, function() {
           debugger;
           console.log('Value is set to ' + deadline);
         });
@@ -27,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
   endTimerButton.addEventListener('click', function() {
     chrome.tabs.getSelected(null, function(tab) {
         alert("end");
-        chrome.storage.local.get(['misha'], function(result) {
+        chrome.storage.sync.get(['misha'], function(result) {
             storedJSONDate = result['misha'];
             testdate = new Date(storedJSONDate);
             console.log(testdate);
@@ -42,7 +46,6 @@ function getTimeRemaining(endtime) {
   var seconds = Math.floor((t / 1000) % 60);
   var minutes = Math.floor((t / 1000 / 60) % 60);
   var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-  // var days = Math.floor(t / (1000 * 60 * 60 * 24));
   return {
     'total': t,
     // 'days': days,
@@ -73,9 +76,8 @@ function initializeClock(id, endtime) {
   var timeinterval = setInterval(updateClock, 1000);
 }
 
-function initializeClock2(id, endtime) {
+function initializeToZero(id, endtime) {
   var clock = document.getElementById(id);
-  // var daysSpan = clock.querySelector('.days');
   var hoursSpan = clock.querySelector('.hours');
   var minutesSpan = clock.querySelector('.minutes');
   var secondsSpan = clock.querySelector('.seconds');
