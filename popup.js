@@ -1,12 +1,15 @@
+console.log("created popup");
 // var deadline = new Date(Date.parse(new Date()) + 1 * 0 * 0 * 0 * 1000);
 var deadline = new Date(Date.parse(new Date()) + 1 * 2 * 60 * 60 * 1000);
-initializeToZero('clockdiv', deadline);
+initializeToZero('clockdiv', deadline);  // sets timer to 0
 var storage = chrome.storage.local;
 var storedJSONDate;
 var testdate;
 
 chrome.runtime.getBackgroundPage(function (backgroundPage) {
-    console.log(backgroundPage.cow); // Displays "mooh".
+    backgroundPage.startTime = deadline.toJSON();
+    testdate = new Date(backgroundPage.startTime)
+    console.log(testdate); // Displays "mooh".
 });
 // showPopup();
 document.addEventListener('DOMContentLoaded', function() {
