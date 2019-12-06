@@ -1,6 +1,6 @@
-var cow = "mooh";
 var startTime;
 var endTime;
+var created = false;
 
 setInterval(function() {
     alert("Hello");

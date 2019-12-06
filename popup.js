@@ -1,33 +1,53 @@
 console.log("created popup");
-// var deadline = new Date(Date.parse(new Date()) + 1 * 0 * 0 * 0 * 1000);
+var zero = new Date(Date.parse(new Date()) + 1 * 0 * 0 * 0 * 1000);
 var deadline = new Date(Date.parse(new Date()) + 1 * 2 * 60 * 60 * 1000);
-initializeToZero('clockdiv', deadline);  // sets timer to 0
+
 var storage = chrome.storage.local;
 var storedJSONDate;
 var testdate;
 
-chrome.runtime.getBackgroundPage(function (backgroundPage) {
-    backgroundPage.startTime = deadline.toJSON();
-    testdate = new Date(backgroundPage.startTime)
-    console.log(testdate); // Displays "mooh".
-});
-// showPopup();
+var myClock ;
+var myTimer;
+
+start();
+
+function start() {
+    chrome.runtime.getBackgroundPage(function (backgroundPage) {
+        // do something
+    });
+    var clock = document.getElementById('clockdiv');
+    var hoursSpan = clock.querySelector('.hours');
+    var minutesSpan = clock.querySelector('.minutes');
+    var secondsSpan = clock.querySelector('.seconds');
+    hoursSpan.innerHTML = ('0' + 0).slice(-2);
+    minutesSpan.innerHTML = ('0' + 0).slice(-2);
+    secondsSpan.innerHTML = ('0' + 0).slice(-2);
+}
+
+// start and end button listen
 document.addEventListener('DOMContentLoaded', function() {
   var startTimerButton = document.getElementById('startTimer');
   var endTimerButton = document.getElementById('endTimer');
-
   // start timer button
   startTimerButton.addEventListener('click', function() {
-    chrome.tabs.getSelected(null, function(tab) {
-        alert("start");
-        initializeClock('clockdiv', deadline);
-        var test = 'hello';
-        var curr = deadline.toJSON();
-        chrome.storage.sync.set({'misha': curr}, function() {
-          debugger;
-          console.log('Value is set to ' + deadline);
-        });
-    });
+
+
+    var tempdeadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 10 * 1000);
+    initializeClock('clockdiv', tempdeadline);
+    // chrome.tabs.getSelected(null, function(tab) {
+        // alert("start");
+        // deadline = new Date(Date.parse(new Date()) + 1 * 2 * 60 * 60 * 1000);
+        // initializeClock('clockdiv', deadline);
+
+        // var curr = deadline.toJSON();
+        // chrome.storage.sync.set({'misha': curr}, function() {
+        //   // debugger;
+        //   chrome.runtime.getBackgroundPage(function (backgroundPage) {
+        //       backgroundPage.endTime = deadline.toJSON();
+        //   });
+        //   console.log('Value is set to ' + curr);
+        // });
+    // });
   }, false);
 
   // end timer button
@@ -59,6 +79,8 @@ function getTimeRemaining(endtime) {
 }
 
 function initializeClock(id, endtime) {
+  zero = new Date(Date.parse(new Date()) + 1 * 0 * 0 * 0 * 1000);
+  initializeToZero(id, zero);
   var clock = document.getElementById(id);
   // var daysSpan = clock.querySelector('.days');
   var hoursSpan = clock.querySelector('.hours');
@@ -70,7 +92,6 @@ function initializeClock(id, endtime) {
     hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
     minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
     secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-
     if (t.total <= 0) {
       clearInterval(timeinterval);
     }
@@ -80,6 +101,8 @@ function initializeClock(id, endtime) {
 }
 
 function initializeToZero(id, endtime) {
+  // var timeinterval = setInterval(0, 1000);
+  // clearInterval(setInterval(endtime, 1000));
   var clock = document.getElementById(id);
   var hoursSpan = clock.querySelector('.hours');
   var minutesSpan = clock.querySelector('.minutes');
@@ -89,3 +112,22 @@ function initializeToZero(id, endtime) {
   minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
   secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
 }
+
+
+// if (!backgroundPage.created) {
+//     backgroundPage.startTime = deadline.toJSON();
+//     testdate = new Date(backgroundPage.startTime)
+//     console.log(testdate); // Displays "mooh".
+//     backgroundPage.created = true;
+//     initializeToZero('clockdiv', zero);  // sets timer to 0
+// } else {
+//     zero = new Date(Date.parse(new Date()) + 1 * 0 * 0 * 0 * 1000);
+//     chrome.storage.sync.get(['misha'], function(result) {
+//         storedJSONDate = result['misha'];
+//         testdate = new Date(storedJSONDate);
+//         console.log(testdate);
+//     });
+//     initializeToZero('clockdiv', testdate);
+//     initializeClock('clockdiv', testdate);
+// }
+// initializeToZero('clockdiv', zero);  // sets timer to 0
