@@ -1,15 +1,22 @@
 console.log("created popup");
 var zero = new Date(Date.parse(new Date()) + 1 * 0 * 0 * 0 * 1000);
-var end = new Date(Date.parse(new Date()) + 1 * 2 * 60 * 60 * 1000);
+var end;
 
 var storage = chrome.storage.local;
 var storedJSONDate;
 var testdate;
+
+
 var myTimer;
+var check = false;
 
 var hours = 2;
 var minutes = 60;
 var seconds = 60;
+
+var resumeHours;
+var resumeMinutes;
+var resumeSeconds;
 
 
 initializeClock();
@@ -24,9 +31,6 @@ function myClock() {
   hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
   minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
   secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-  // seconds = secondsSpan;
-  // minutes = minutesSpan;
-  // hours = hoursSpan;
   if (t.total <= 0) {
     clearInterval(myTimer);
   }
@@ -54,16 +58,10 @@ document.addEventListener('DOMContentLoaded', function() {
   // start timer button
   startTimerButton.addEventListener('click', function() {
     end = new Date(Date.parse(new Date()) + 1 * 2 * 60 * 60 * 1000);
-    myClock();
-    var clock = document.getElementById('clockdiv');
-    var hoursSpan = clock.querySelector('.hours');
-    var minutesSpan = clock.querySelector('.minutes');
-    var secondsSpan = clock.querySelector('.seconds');
-    // seconds = secondsSpan;
-    // minutes = minutesSpan;
-    // hours = hoursSpan;
+    myTimer = 0;
+    new myClock();
     myTimer = setInterval(myClock, 1000);
-
+    check = false;
     // var tempdeadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 10 * 1000);
     // initializeClock('clockdiv', tempdeadline);
     // chrome.tabs.getSelected(null, function(tab) {
@@ -84,23 +82,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // end timer button
   pauseTimerButton.addEventListener('click', function() {
-    chrome.tabs.getSelected(null, function(tab) {
-        // alert("end");
-        chrome.storage.sync.get(['misha'], function(result) {
-            // storedJSONDate = result['misha'];
-            // testdate = new Date(storedJSONDate);
-            // console.log(testdate);
-        });
-        clearInterval(myTimer);
-    });
+    // chrome.tabs.getSelected(null, function(tab) {
+    //     // alert("end");
+    //     chrome.storage.sync.get(['misha'], function(result) {
+    //         // storedJSONDate = result['misha'];
+    //         // testdate = new Date(storedJSONDate);
+    //         // console.log(testdate);
+    //     });
+    //
+    // });
+    check = true;
+    var t = getTimeRemaining(end);
+    resumeSeconds = (t.seconds);
+    resumeMinutes = t.minutes;
+    resumeHours = (t.hours);
+    console.log(resumeHours+ "     " + resumeMinutes + "    " + resumeSeconds);
+    clearInterval(myTimer);
+    myTimer = 0;
   }, false);
+
+
   resumeTimerButton.addEventListener('click', function() {
-    chrome.tabs.getSelected(null, function(tab) {
-        chrome.storage.sync.get(['misha'], function(result) {
-        });
+    // chrome.tabs.getSelected(null, function(tab) {
+    //     chrome.storage.sync.get(['misha'], function(result) {
+    //     });
+    //
+    // });
+    if (check) {
+        console.log(resumeHours+ "     " + resumeMinutes + "    " + resumeSeconds);
+        end = new Date(Date.parse(new Date()) + (resumeSeconds  * 1000) + (resumeMinutes * 60 * 1000) + (resumeHours * 60 * 60 * 1000));
         myClock();
         myTimer = setInterval(myClock, 1000);
-    });
+        check = false;
+    }
   }, false);
 }, false);
 
