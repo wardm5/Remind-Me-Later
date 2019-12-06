@@ -1,17 +1,31 @@
 console.log("created popup");
 var zero = new Date(Date.parse(new Date()) + 1 * 0 * 0 * 0 * 1000);
-var deadline = new Date(Date.parse(new Date()) + 1 * 2 * 60 * 60 * 1000);
+var end = new Date(Date.parse(new Date()) + 1 * 2 * 60 * 60 * 1000);
 
 var storage = chrome.storage.local;
 var storedJSONDate;
 var testdate;
-
-var myClock ;
 var myTimer;
 
-start();
 
-function start() {
+initializeClock();
+
+function myClock() {
+  var clock = document.getElementById('clockdiv');
+  var t = getTimeRemaining(end);
+  var clock = document.getElementById('clockdiv');
+  var hoursSpan = clock.querySelector('.hours');
+  var minutesSpan = clock.querySelector('.minutes');
+  var secondsSpan = clock.querySelector('.seconds');
+  hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+  minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+  secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+  if (t.total <= 0) {
+    clearInterval(myTimer);
+  }
+}
+
+function initializeClock() {
     chrome.runtime.getBackgroundPage(function (backgroundPage) {
         // do something
     });
@@ -26,14 +40,18 @@ function start() {
 
 // start and end button listen
 document.addEventListener('DOMContentLoaded', function() {
+    // pauseTimer
   var startTimerButton = document.getElementById('startTimer');
-  var endTimerButton = document.getElementById('endTimer');
+  var pauseTimerButton = document.getElementById('pauseTimer');
+  var resumeTimerButton = document.getElementById('resumeTimer');
   // start timer button
   startTimerButton.addEventListener('click', function() {
+    end = new Date(Date.parse(new Date()) + 1 * 2 * 60 * 60 * 1000);
+    myClock();
+    myTimer = setInterval(myClock, 1000);
 
-
-    var tempdeadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 10 * 1000);
-    initializeClock('clockdiv', tempdeadline);
+    // var tempdeadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 10 * 1000);
+    // initializeClock('clockdiv', tempdeadline);
     // chrome.tabs.getSelected(null, function(tab) {
         // alert("start");
         // deadline = new Date(Date.parse(new Date()) + 1 * 2 * 60 * 60 * 1000);
@@ -51,14 +69,23 @@ document.addEventListener('DOMContentLoaded', function() {
   }, false);
 
   // end timer button
-  endTimerButton.addEventListener('click', function() {
+  pauseTimerButton.addEventListener('click', function() {
     chrome.tabs.getSelected(null, function(tab) {
-        alert("end");
+        // alert("end");
         chrome.storage.sync.get(['misha'], function(result) {
-            storedJSONDate = result['misha'];
-            testdate = new Date(storedJSONDate);
-            console.log(testdate);
+            // storedJSONDate = result['misha'];
+            // testdate = new Date(storedJSONDate);
+            // console.log(testdate);
         });
+        clearInterval(myTimer);
+    });
+  }, false);
+  resumeTimerButton.addEventListener('click', function() {
+    chrome.tabs.getSelected(null, function(tab) {
+        chrome.storage.sync.get(['misha'], function(result) {
+        });
+        myClock();
+        myTimer = setInterval(myClock, 1000);
     });
   }, false);
 }, false);
@@ -78,40 +105,40 @@ function getTimeRemaining(endtime) {
   };
 }
 
-function initializeClock(id, endtime) {
-  zero = new Date(Date.parse(new Date()) + 1 * 0 * 0 * 0 * 1000);
-  initializeToZero(id, zero);
-  var clock = document.getElementById(id);
-  // var daysSpan = clock.querySelector('.days');
-  var hoursSpan = clock.querySelector('.hours');
-  var minutesSpan = clock.querySelector('.minutes');
-  var secondsSpan = clock.querySelector('.seconds');
-  function updateClock() {
-    var t = getTimeRemaining(endtime);
-    // daysSpan.innerHTML = t.days;
-    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-    if (t.total <= 0) {
-      clearInterval(timeinterval);
-    }
-  }
-  updateClock();
-  var timeinterval = setInterval(updateClock, 1000);
-}
+// function initializeClock(id, endtime) {
+//   zero = new Date(Date.parse(new Date()) + 1 * 0 * 0 * 0 * 1000);
+//   initializeToZero(id, zero);
+//   var clock = document.getElementById(id);
+//   // var daysSpan = clock.querySelector('.days');
+//   var hoursSpan = clock.querySelector('.hours');
+//   var minutesSpan = clock.querySelector('.minutes');
+//   var secondsSpan = clock.querySelector('.seconds');
+//   function updateClock() {
+//     var t = getTimeRemaining(endtime);
+//     // daysSpan.innerHTML = t.days;
+//     hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+//     minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+//     secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+//     if (t.total <= 0) {
+//       clearInterval(timeinterval);
+//     }
+//   }
+//   updateClock();
+//   var timeinterval = setInterval(updateClock, 1000);
+// }
 
-function initializeToZero(id, endtime) {
-  // var timeinterval = setInterval(0, 1000);
-  // clearInterval(setInterval(endtime, 1000));
-  var clock = document.getElementById(id);
-  var hoursSpan = clock.querySelector('.hours');
-  var minutesSpan = clock.querySelector('.minutes');
-  var secondsSpan = clock.querySelector('.seconds');
-  var t = getTimeRemaining(endtime);
-  hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-  minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-  secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-}
+// function initializeToZero(id, endtime) {
+//   // var timeinterval = setInterval(0, 1000);
+//   // clearInterval(setInterval(endtime, 1000));
+//   var clock = document.getElementById(id);
+//   var hoursSpan = clock.querySelector('.hours');
+//   var minutesSpan = clock.querySelector('.minutes');
+//   var secondsSpan = clock.querySelector('.seconds');
+//   var t = getTimeRemaining(endtime);
+//   hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+//   minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+//   secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+// }
 
 
 // if (!backgroundPage.created) {
