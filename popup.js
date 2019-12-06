@@ -7,6 +7,10 @@ var storedJSONDate;
 var testdate;
 var myTimer;
 
+var hours = 2;
+var minutes = 60;
+var seconds = 60;
+
 
 initializeClock();
 
@@ -20,6 +24,9 @@ function myClock() {
   hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
   minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
   secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+  // seconds = secondsSpan;
+  // minutes = minutesSpan;
+  // hours = hoursSpan;
   if (t.total <= 0) {
     clearInterval(myTimer);
   }
@@ -48,6 +55,13 @@ document.addEventListener('DOMContentLoaded', function() {
   startTimerButton.addEventListener('click', function() {
     end = new Date(Date.parse(new Date()) + 1 * 2 * 60 * 60 * 1000);
     myClock();
+    var clock = document.getElementById('clockdiv');
+    var hoursSpan = clock.querySelector('.hours');
+    var minutesSpan = clock.querySelector('.minutes');
+    var secondsSpan = clock.querySelector('.seconds');
+    // seconds = secondsSpan;
+    // minutes = minutesSpan;
+    // hours = hoursSpan;
     myTimer = setInterval(myClock, 1000);
 
     // var tempdeadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 10 * 1000);
