@@ -5,11 +5,12 @@ var endTime;
 var timer;
 var created = false;
 var paused;
+
 function start() {
     if (created) {
         timer = setTimeout(function() {
             if (!paused) {
-                PopupCenter('popup.html', 'mywin', 315, 250);
+                PopupCenter('reminder.html', 'mywin', 315, 250);
             }
         }, ((hours * 60 * 60 * 1000) + (minutes * 60 * 1000) + (seconds) * 1000));
     }
@@ -19,12 +20,13 @@ function pause() {
     clearTimeout(timer);
     paused = true;
 }
+
 function resume() {
     paused = false;
     if (created) {
         timer = setTimeout(function() {
             if (!paused) {
-                PopupCenter('popup.html', 'mywin', 315, 250);
+                PopupCenter('reminder.html', 'mywin', 315, 250);
             }
         }, ((hours * 60 * 60 * 1000) + (minutes * 60 * 1000) + (seconds) * 1000));
     }

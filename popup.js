@@ -1,4 +1,3 @@
-console.log("created popup");
 var end;
 
 var storage = chrome.storage.local;
@@ -40,13 +39,27 @@ function myClock() {
 }
 
 function initializeClock() {
-    var clock = document.getElementById('clockdiv');
-    var hoursSpan = clock.querySelector('.hours');
-    var minutesSpan = clock.querySelector('.minutes');
-    var secondsSpan = clock.querySelector('.seconds');
-    hoursSpan.innerHTML = ('0' + 0).slice(-2);
-    minutesSpan.innerHTML = ('0' + 0).slice(-2);
-    secondsSpan.innerHTML = ('0' + 0).slice(-2);
+    chrome.runtime.getBackgroundPage(function (backgroundPage) {
+        if (backgroundPage.created) {
+            var tempHrs = backgroundPage.hours;
+            var tempMins = backgroundPage.minutes;
+            var tempSecs = backgroundPage.seconds; 
+            end = new Date(Date.parse(new Date()) + + (tempHrs * 60 * 60 * 1000) + (tempMins * 60 * 1000) + (tempSecs * 1000));
+            myClock();
+            clearInterval(myTimer);
+            myTimer = 0;
+            myTimer = setInterval(myClock, 1000);
+            check = false;
+        } else {
+            var clock = document.getElementById('clockdiv');
+            var hoursSpan = clock.querySelector('.hours');
+            var minutesSpan = clock.querySelector('.minutes');
+            var secondsSpan = clock.querySelector('.seconds');
+            hoursSpan.innerHTML = ('0' + 0).slice(-2);
+            minutesSpan.innerHTML = ('0' + 0).slice(-2);
+            secondsSpan.innerHTML = ('0' + 0).slice(-2);
+        }
+    });
 }
 
 // start and end button listen
