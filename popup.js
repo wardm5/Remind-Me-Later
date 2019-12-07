@@ -1,23 +1,19 @@
 console.log("created popup");
-var zero = new Date(Date.parse(new Date()) + 1 * 0 * 0 * 0 * 1000);
 var end;
 
 var storage = chrome.storage.local;
 var storedJSONDate;
-var testdate;
-
 
 var myTimer;
 var check = false;
 
-var hours = 2;
-var minutes = 60;
-var seconds = 60;
+var inputHours = 0;
+var inputMinutes = 0;
+var inputSeconds = 15;
 
 var resumeHours;
 var resumeMinutes;
 var resumeSeconds;
-
 
 initializeClock();
 
@@ -31,15 +27,19 @@ function myClock() {
   hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
   minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
   secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+  chrome.runtime.getBackgroundPage(function (backgroundPage) {
+      backgroundPage.created = true;
+      backgroundPage.hours = t.hours;
+      backgroundPage.minutes = t.minutes;
+      backgroundPage.seconds = t.seconds;
+      backgroundPage.start();
+  });
   if (t.total <= 0) {
     clearInterval(myTimer);
   }
 }
 
 function initializeClock() {
-    chrome.runtime.getBackgroundPage(function (backgroundPage) {
-        // do something
-    });
     var clock = document.getElementById('clockdiv');
     var hoursSpan = clock.querySelector('.hours');
     var minutesSpan = clock.querySelector('.minutes');
@@ -51,46 +51,21 @@ function initializeClock() {
 
 // start and end button listen
 document.addEventListener('DOMContentLoaded', function() {
-    // pauseTimer
   var startTimerButton = document.getElementById('startTimer');
   var pauseTimerButton = document.getElementById('pauseTimer');
   var resumeTimerButton = document.getElementById('resumeTimer');
   // start timer button
   startTimerButton.addEventListener('click', function() {
-    end = new Date(Date.parse(new Date()) + 1 * 2 * 60 * 60 * 1000);
+    end = new Date(Date.parse(new Date()) + + (inputHours * 60 * 60 * 1000) + (inputMinutes * 60 * 1000) + (inputSeconds * 1000));
+    myClock();
+    clearInterval(myTimer);
     myTimer = 0;
-    new myClock();
     myTimer = setInterval(myClock, 1000);
     check = false;
-    // var tempdeadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 10 * 1000);
-    // initializeClock('clockdiv', tempdeadline);
-    // chrome.tabs.getSelected(null, function(tab) {
-        // alert("start");
-        // deadline = new Date(Date.parse(new Date()) + 1 * 2 * 60 * 60 * 1000);
-        // initializeClock('clockdiv', deadline);
-
-        // var curr = deadline.toJSON();
-        // chrome.storage.sync.set({'misha': curr}, function() {
-        //   // debugger;
-        //   chrome.runtime.getBackgroundPage(function (backgroundPage) {
-        //       backgroundPage.endTime = deadline.toJSON();
-        //   });
-        //   console.log('Value is set to ' + curr);
-        // });
-    // });
   }, false);
 
   // end timer button
   pauseTimerButton.addEventListener('click', function() {
-    // chrome.tabs.getSelected(null, function(tab) {
-    //     // alert("end");
-    //     chrome.storage.sync.get(['misha'], function(result) {
-    //         // storedJSONDate = result['misha'];
-    //         // testdate = new Date(storedJSONDate);
-    //         // console.log(testdate);
-    //     });
-    //
-    // });
     check = true;
     var t = getTimeRemaining(end);
     resumeSeconds = (t.seconds);
@@ -98,22 +73,28 @@ document.addEventListener('DOMContentLoaded', function() {
     resumeHours = (t.hours);
     console.log(resumeHours+ "     " + resumeMinutes + "    " + resumeSeconds);
     clearInterval(myTimer);
-    myTimer = 0;
+    chrome.runtime.getBackgroundPage(function (backgroundPage) {
+        backgroundPage.hours = t.hours;
+        backgroundPage.minutes = t.minutes;
+        backgroundPage.seconds = t.seconds;
+        backgroundPage.pause();
+    });
   }, false);
 
 
   resumeTimerButton.addEventListener('click', function() {
-    // chrome.tabs.getSelected(null, function(tab) {
-    //     chrome.storage.sync.get(['misha'], function(result) {
-    //     });
-    //
-    // });
     if (check) {
         console.log(resumeHours+ "     " + resumeMinutes + "    " + resumeSeconds);
         end = new Date(Date.parse(new Date()) + (resumeSeconds  * 1000) + (resumeMinutes * 60 * 1000) + (resumeHours * 60 * 60 * 1000));
         myClock();
         myTimer = setInterval(myClock, 1000);
         check = false;
+        chrome.runtime.getBackgroundPage(function (backgroundPage) {
+            backgroundPage.hours = resumeHours;
+            backgroundPage.minutes = resumeMinutes;
+            backgroundPage.seconds = resumeSeconds;
+            backgroundPage.resume();
+        });
     }
   }, false);
 }, false);
@@ -126,7 +107,6 @@ function getTimeRemaining(endtime) {
   var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
   return {
     'total': t,
-    // 'days': days,
     'hours': hours,
     'minutes': minutes,
     'seconds': seconds
@@ -186,3 +166,21 @@ function getTimeRemaining(endtime) {
 //     initializeClock('clockdiv', testdate);
 // }
 // initializeToZero('clockdiv', zero);  // sets timer to 0
+
+
+// var tempdeadline = new Date(Date.parse(new Date()) + 1 * 1 * 1 * 10 * 1000);
+// initializeClock('clockdiv', tempdeadline);
+// chrome.tabs.getSelected(null, function(tab) {
+    // alert("start");
+    // deadline = new Date(Date.parse(new Date()) + 1 * 2 * 60 * 60 * 1000);
+    // initializeClock('clockdiv', deadline);
+
+    // var curr = deadline.toJSON();
+    // chrome.storage.sync.set({'misha': curr}, function() {
+    //   // debugger;
+    //   chrome.runtime.getBackgroundPage(function (backgroundPage) {
+    //       backgroundPage.endTime = deadline.toJSON();
+    //   });
+    //   console.log('Value is set to ' + curr);
+    // });
+// });
