@@ -50,14 +50,6 @@ chrome.runtime.onMessage.addListener(
     }
 );
 
-// chrome.runtime.onMessage.addListener(
-//     function(request, sender, sendResponse) {
-//         if (request.msg === "initialize") {
-//
-//         }
-//     }
-// );
-
 function setClock(hours, minutes, seconds) {
     var clock = document.getElementById('clockdiv');
     var hoursSpan = clock.querySelector('.hours');
