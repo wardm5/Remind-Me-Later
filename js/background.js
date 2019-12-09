@@ -25,7 +25,7 @@ function pause() {
 function myClock() {
   if (!paused) {
       if (hours <= 0 && minutes <= 0 && seconds <= -1 && created) {
-        PopupCenter('reminder.html', 'mywin', 315, 250);
+        PopupCenter('/html-css/reminder.html', 'mywin', 315, 250);
         clearInterval(timer);
       } else {
           chrome.runtime.sendMessage({
