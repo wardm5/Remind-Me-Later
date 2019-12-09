@@ -3,8 +3,8 @@ var inputMinutes = 0;
 var inputSeconds = 0;
 
 var defaultHours = 0;
-var defaultMinutes = 1;
-var defaultSeconds = 1;
+var defaultMinutes = 0;
+var defaultSeconds = 5;
 
 initializeClock();
 

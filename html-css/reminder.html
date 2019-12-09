@@ -1,11 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            Reminder to look away!
-        </title>
-    </head>
     <body>
-        <p> testing </p>
+
+        <audio id="myAudio">
+          <source src="bell.ogg" type="audio/ogg">
+          <source src="/audio/bell.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+
+        <p>This is your reminder!</p>
+
+        <!-- <button onclick="playAudio()" type="button">Play Audio</button>
+        <button onclick="pauseAudio()" type="button">Pause Audio</button>  -->
+
+        <script>
+            var x = document.getElementById("myAudio");
+            playAudio();
+            function playAudio() {
+              x.play();
+            }
+
+            // function pauseAudio() {
+            //   x.pause();
+            // }
+        </script>
+
     </body>
 </html>
