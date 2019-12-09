@@ -44,7 +44,7 @@ In terms of data and input, I assumed that the column input order would stay the
 
 Furthermore, I made an assumption that the user would provide two arguments through the bash script in order to override the defaults. This is done in order to reduce initial complexity but could be implemented if needed with some testing for ease of use.
 
-Another assumption I made was in regards to the test cases. I assume that tests will be added to the input folder in the main directory (border-crossing-analysis --> input).
+Another assumption I made was in regards to the test cases. I assume that tests will be added to the input folder in the main directory (border-crossing-analysis -> input).
 
 Finally, the last assumption is that any running of this program would be with the run.sh or the run_tests.sh scripts. This is critical as I decided to read and write to files based on the script running being located in the main/parent directory of the src folder.
 
@@ -53,4 +53,5 @@ While the program works and meets the specifications given, there are some areas
 
 * Time and space complexity optimizations including reducing from two loops to one, reducing looping through strings to split multiple times, and reduction of data structures if possible.
 * More user friendly input to start the program and output to alert the user of exceptions or how to handle errors.
-* More documentation, tests, and a code review in order to ensure the code works as effectively under all possible test cases. -->
+* More documentation, tests, and a code review in order to ensure the code works as effectively under all possible test cases.
+-->
