@@ -10,11 +10,11 @@ This coding project is designed to create a Chrome Extension that addresses the 
 *  Future iterations should have a way to have multiple timers for the user to set
 *  Those multiple timers should have the option to reset indefinitely
 
- The language of choice is Java and the program relies upon object oriented programming principles, data structures, and algorithms found in computer science to solve the problem. The code was designed to be scalable as evident with the use of HashMaps, ArrayLists, and Sets for quick and efficient storage and access of data.
+ <!-- The language of choice is Java and the program relies upon object oriented programming principles, data structures, and algorithms found in computer science to solve the problem. The code was designed to be scalable as evident with the use of HashMaps, ArrayLists, and Sets for quick and efficient storage and access of data.
 
 Below was the prompt for this coding challenge:
 
-**For this challenge, we want to you to calculate the total number of times vehicles, equipment, passengers and pedestrians cross the U.S.-Canadian and U.S.-Mexican borders each month. We also want to know the running monthly average of total number of crossings for that type of crossing and border.**
+**For this challenge, we want to you to calculate the total number of times vehicles, equipment, passengers and pedestrians cross the U.S.-Canadian and U.S.-Mexican borders each month. We also want to know the running monthly average of total number of crossings for that type of crossing and border.** -->
 
 <!-- ## Instructions to Run
 
