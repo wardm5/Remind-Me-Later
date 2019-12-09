@@ -12,3 +12,6 @@ https://raw.githubusercontent.com/rebeccaestes/yoga_api/master/yoga_api.json
 
 https://www.sanwebe.com/2014/08/css-html-forms-designs
     -- CSS for forms and input to JavaScript
+
+https://codepen.io/rikschennink/pen/lyuaf
+    -- another format for clock that looked interesting

@@ -47,11 +47,15 @@ Furthermore, I made an assumption that the user would provide two arguments thro
 Another assumption I made was in regards to the test cases. I assume that tests will be added to the input folder in the main directory (border-crossing-analysis -> input).
 
 Finally, the last assumption is that any running of this program would be with the run.sh or the run_tests.sh scripts. This is critical as I decided to read and write to files based on the script running being located in the main/parent directory of the src folder.
-
-## Next Steps
-While the program works and meets the specifications given, there are some areas of improvement that could be included in the next steps. These are listed below:
-
-* Time and space complexity optimizations including reducing from two loops to one, reducing looping through strings to split multiple times, and reduction of data structures if possible.
-* More user friendly input to start the program and output to alert the user of exceptions or how to handle errors.
-* More documentation, tests, and a code review in order to ensure the code works as effectively under all possible test cases.
 -->
+## Next Steps
+While the Chrome Extension works and meets the critical specifications above, there are some areas of improvement that could be included in the next steps. These are listed below:
+
+**12/8/2019**
+* Better input format for reminder timer - one line input
+* Create functionality for multiple reminders
+* Create functionality for repeating or turning off the reminder
+* Allow for audio noise when alarm goes off
+* Updates to the UI of the extension
+* Fix misc. bugs
+*
