@@ -1,10 +1,10 @@
 var hours = 0;
 var minutes = 0;
 var seconds = 0;
-var endtime;
 var timer;
 var created = false;
 var repeat = false;
+var paused = false;
 
 var setHours;
 var setMinutes;
@@ -13,46 +13,40 @@ var seconds;
 function start() {
     myClock();
     clearInterval(timer);
-    myTimer = 0;
-    myTimer = setInterval(myClock, 1000);
+    timer = 0;
+    timer = setInterval(myClock, 1000);
     created = true;
 }
 
-// function pause() {
-//
-// }
-
-function myClock() {
-  var t = getTimeRemaining();
-  hours = t.hours;
-  minutes = t.minutes;
-  seconds = t.seconds;
-  if (t.total <= -1000) {
-    PopupCenter('reminder.html', 'mywin', 315, 250);
-    clearInterval(myTimer);
-  } else {
-      chrome.runtime.sendMessage({
-          msg: "updateTime",
-          data: {
-              hours: hours,
-              minutes: minutes,
-              seconds: seconds
-          }
-      });
-  }
+function pause() {
+  paused = true;
 }
 
-function getTimeRemaining() {
-  var t = Date.parse(endtime) - Date.parse(new Date());
-  var seconds = Math.floor((t / 1000) % 60);
-  var minutes = Math.floor((t / 1000 / 60) % 60);
-  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-  return {
-    'total': t,
-    'hours': hours,
-    'minutes': minutes,
-    'seconds': seconds
-  };
+function myClock() {
+  if (!paused) {
+      if (hours <= 0 && minutes <= 0 && seconds <= -1 && created) {
+        PopupCenter('reminder.html', 'mywin', 315, 250);
+        clearInterval(timer);
+      } else {
+          chrome.runtime.sendMessage({
+              msg: "updateTime",
+              data: {
+                  hours: hours,
+                  minutes: minutes,
+                  seconds: seconds
+              }
+          });
+      }
+      if (minutes <= 0 && hours >= 1 && seconds <= 0) {
+          minutes = 60;
+          hours--;
+      }
+      if (seconds <= 0 && minutes >= 1) {
+          seconds = 60;
+          minutes--;
+      }
+      seconds--;
+  }
 }
 
 function PopupCenter(pageURL, title,w,h) {
