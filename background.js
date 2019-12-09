@@ -1,16 +1,21 @@
-var hours;
-var minutes;
-var seconds;
+var hours = 0;
+var minutes = 0;
+var seconds = 0;
 var endtime;
 var timer;
+var created = false;
+var repeat = false;
+
+var setHours;
+var setMinutes;
+var seconds;
 
 function start() {
-    debugger;
-    console.log("testing1");
     myClock();
     clearInterval(timer);
     myTimer = 0;
     myTimer = setInterval(myClock, 1000);
+    created = true;
 }
 
 // function pause() {
@@ -22,8 +27,7 @@ function myClock() {
   hours = t.hours;
   minutes = t.minutes;
   seconds = t.seconds;
-  console.log(hours + "   " + minutes + "   " + seconds);
-  if (t.total <= 0) {
+  if (t.total <= -1000) {
     PopupCenter('reminder.html', 'mywin', 315, 250);
     clearInterval(myTimer);
   } else {
