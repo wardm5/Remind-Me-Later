@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Remind Me Not",
-  "description": "This Chrome Extension will remind you to take a break from the computerx",
+  "description": "This Chrome Extension will remind you to take a break from the computer",
   "version": "1.0",
   "icons": {
       "16":  "icon16.png",
@@ -12,8 +12,7 @@
       "default_popup": "popup.html"
   },
   "background": {
-      "scripts": ["background.js"],
-      "persistent": false
+      "scripts": ["background.js"]
   },
   "permissions": [
        "activeTab",

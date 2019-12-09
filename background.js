@@ -1,41 +1,55 @@
 var hours;
 var minutes;
 var seconds;
-var endTime;
+var endtime;
 var timer;
-var created = false;
-var paused;
 
 function start() {
-    if (created) {
-        timer = setTimeout(function() {
-            if (!paused) {
-                PopupCenter('reminder.html', 'mywin', 315, 250);
-            }
-        }, ((hours * 60 * 60 * 1000) + (minutes * 60 * 1000) + (seconds) * 1000));
-    }
+    debugger;
+    console.log("testing1");
+    myClock();
+    clearInterval(timer);
+    myTimer = 0;
+    myTimer = setInterval(myClock, 1000);
 }
 
-function pause() {
-    clearTimeout(timer);
-    paused = true;
+// function pause() {
+//
+// }
+
+function myClock() {
+  var t = getTimeRemaining();
+  hours = t.hours;
+  minutes = t.minutes;
+  seconds = t.seconds;
+  console.log(hours + "   " + minutes + "   " + seconds);
+  if (t.total <= 0) {
+    PopupCenter('reminder.html', 'mywin', 315, 250);
+    clearInterval(myTimer);
+  } else {
+      chrome.runtime.sendMessage({
+          msg: "updateTime",
+          data: {
+              hours: hours,
+              minutes: minutes,
+              seconds: seconds
+          }
+      });
+  }
 }
 
-function resume() {
-    paused = false;
-    if (created) {
-        timer = setTimeout(function() {
-            if (!paused) {
-                PopupCenter('reminder.html', 'mywin', 315, 250);
-            }
-        }, ((hours * 60 * 60 * 1000) + (minutes * 60 * 1000) + (seconds) * 1000));
-    }
+function getTimeRemaining() {
+  var t = Date.parse(endtime) - Date.parse(new Date());
+  var seconds = Math.floor((t / 1000) % 60);
+  var minutes = Math.floor((t / 1000 / 60) % 60);
+  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+  return {
+    'total': t,
+    'hours': hours,
+    'minutes': minutes,
+    'seconds': seconds
+  };
 }
-
-
-
-
-
 
 function PopupCenter(pageURL, title,w,h) {
   var left = (screen.width/2)-(w/2);
