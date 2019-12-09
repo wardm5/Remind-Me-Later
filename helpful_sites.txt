@@ -1,2 +1,11 @@
 https://stackoverflow.com/questions/12265403/passing-message-from-background-js-to-popup-js
     -- provides way to communicate through multiple JavaScript files.
+
+https://stackoverflow.com/questions/452003/cancel-kill-window-settimeout-before-it-happens
+    -- clearTimeout function.
+
+https://www.w3schools.com/jsref/met_win_cleartimeout.asp
+    -- clearTimeout method example.
+
+https://raw.githubusercontent.com/rebeccaestes/yoga_api/master/yoga_api.json
+    -- yoga API link for potential future use
