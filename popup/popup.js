@@ -1,26 +1,26 @@
-var inputHours = 0;
-var inputMinutes = 0;
-var inputSeconds = 0;
-
-var defaultHours = 0;
-var defaultMinutes = 0;
-var defaultSeconds = 5;
-
-var paused = false;
-var soundOn = false;
+// var inputHours = 0;
+// var inputMinutes = 0;
+// var inputSeconds = 0;
+//
+// var defaultHours = 0;
+// var defaultMinutes = 0;
+// var defaultSeconds = 5;
+//
+// var paused = false;
+// var soundOn = false;
 
 var data = {
-    remainingHours: 0,
-    remainingMinutes: 0,
-    remainingSeconds: 0,
+    rH: 0,
+    rM: 0,
+    rS: 0,
 
-    setHours: 0,
-    setMinutes: 0,
-    setSeconds: 0,
+    sH: 0,
+    sM: 0,
+    sS: 5,
 
     sound: false,
-    paused: false,
-    created: false
+    paused: false
+    // created: false
 }
 
 initializeClock();
@@ -44,29 +44,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // var soundButton = document.getElementById('pauseTimer');
   soundButton.addEventListener('click', function() {
-      soundOn = repeatButton.checked;
+      // soundOn = repeatButton.checked;
       data.sound = soundButton.checked;
+
   }, false);
 
   // start timer button
   startTimerButton.addEventListener('click', function() {
+      data.rS = data.sS;
+      data.rM = data.sM;
+      data.rH = data.sH;
       chrome.runtime.sendMessage({
           msg: "start",
-          data: {
-              hours: defaultHours,
-              minutes: defaultMinutes,
-              seconds: defaultSeconds,
-              repeat: true,
-              paused: paused,
-              soundOn: soundOn
-          }
+          // data: {
+          //     hours: defaultHours,
+          //     minutes: defaultMinutes,
+          //     seconds: defaultSeconds,
+          //     repeat: true,
+          //     paused: paused,
+          //     soundOn: soundOn
+          // }
+          data: data
       });
   }, false);
 
   // end timer button
   pauseTimerButton.addEventListener('click', function() {
     chrome.runtime.getBackgroundPage(function (backgroundPage) {
-        backgroundPage.paused = true;
+        backgroundPage.popupData.paused = true;
     });
   }, false);
 }, false);
@@ -74,7 +79,8 @@ document.addEventListener('DOMContentLoaded', function() {
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.msg === "updateTime") {
-            setClock(request.data.hours, request.data.minutes, request.data.seconds);
+            // setClock(request.data.hours, request.data.minutes, request.data.seconds);
+            setClock(request.data.rH, request.data.rM, request.data.rS);
         }
     }
 );
@@ -87,4 +93,11 @@ function setClock(hours, minutes, seconds) {
     hoursSpan.innerHTML = ('0' + hours).slice(-2);
     minutesSpan.innerHTML = ('0' + minutes).slice(-2);
     secondsSpan.innerHTML = ('0' + seconds).slice(-2);
+}
+
+function sendData() {
+    chrome.runtime.sendMessage({
+        msg: "update",
+        data: data
+    });
 }
