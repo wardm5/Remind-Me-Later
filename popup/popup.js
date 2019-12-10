@@ -1,14 +1,3 @@
-// var inputHours = 0;
-// var inputMinutes = 0;
-// var inputSeconds = 0;
-//
-// var defaultHours = 0;
-// var defaultMinutes = 0;
-// var defaultSeconds = 5;
-//
-// var paused = false;
-// var soundOn = false;
-
 var data = {
     rH: 0,
     rM: 0,
@@ -18,9 +7,12 @@ var data = {
     sM: 0,
     sS: 5,
 
+    aH: 0,
+    aM: 0,
+    aS: 20,
+
     sound: false,
     paused: false
-    // created: false
 }
 
 initializeClock();
@@ -42,16 +34,15 @@ document.addEventListener('DOMContentLoaded', function() {
   var pauseTimerButton = document.getElementById('pauseTimer');
   var soundButton = document.getElementById('soundToggle');
 
-  // var soundButton = document.getElementById('pauseTimer');
+  // toggle sound button event
   soundButton.addEventListener('click', function() {
-      // soundOn = repeatButton.checked;
       data.sound = soundButton.checked;
       chrome.runtime.getBackgroundPage(function (backgroundPage) {
           backgroundPage.pD.sound = data.sound;
       });
   }, false);
 
-  // start timer button
+  // start timer button event
   startTimerButton.addEventListener('click', function() {
       data.rS = data.sS;
       data.rM = data.sM;
@@ -62,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }, false);
 
-  // end timer button
+  // end timer button event
   pauseTimerButton.addEventListener('click', function() {
     chrome.runtime.getBackgroundPage(function (backgroundPage) {
         backgroundPage.pD.paused = !backgroundPage.pD.paused;
@@ -70,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }, false);
 }, false);
 
+// update clock time
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.msg === "updateTime") {

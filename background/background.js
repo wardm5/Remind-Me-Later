@@ -1,12 +1,4 @@
-var hours = 0;
-var minutes = 0;
-var seconds = 0;
 var timer;
-// var created = false;
-var repeat = false;
-var paused = false;
-
-var soundOn = false;
 
 var pD = {  // popupData
     rH: 0,  // remaining hours
@@ -16,6 +8,10 @@ var pD = {  // popupData
     sH: 0,   // set hours
     sM: 0,  // set minutes
     sS: 0,  // set seconds
+
+    aH: 0,  // alarm hours
+    aM: 0,  // alarm minutes
+    aS: 20,  // alarm seconds
 
     sound: false,
     paused: false
