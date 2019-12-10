@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // end timer button
   pauseTimerButton.addEventListener('click', function() {
     chrome.runtime.getBackgroundPage(function (backgroundPage) {
-        backgroundPage.pD.paused = true;
+        backgroundPage.pD.paused = !backgroundPage.pD.paused;
     });
   }, false);
 }, false);

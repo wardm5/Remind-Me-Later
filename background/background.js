@@ -56,7 +56,7 @@ function myClock() {
         });
     }
     clockCalculateNextValues();
-  }
+  } 
 }
 
 function clockCalculateNextValues() {
