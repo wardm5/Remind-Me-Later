@@ -17,9 +17,10 @@ This program can be tested by downloading the codebase, and then uploading the R
 ## Next Steps
 While the Chrome Extension works and meets the critical specifications above, there are some areas of improvement that could be included in the next steps. These are listed below:
 
-**12/9/2019**
+**Completed: 12/9/2019**
 * Allow for audio noise when alarm goes off
-**TBD**
+
+**Remaining Work To Be Completed**
 * Better input format for reminder timer - one line input
 * Create functionality for multiple reminders
 * Create functionality for repeating or turning off the reminder
