@@ -42,7 +42,7 @@ function myClock() {
       if (pD.rH <= 0 && pD.rM <= 0 && pD.rS <= -1 && (pD.sH > 0 || pD.sM > 0 || pD.sS > 0)) {
         PopupCenter('/reminder/reminder.html', 'mywin', 315, 250);
         clearInterval(timer);
-        created = false;
+        debugger;
         chrome.runtime.sendMessage({
             msg: "sound",
             data: {
@@ -56,7 +56,7 @@ function myClock() {
         });
     }
     clockCalculateNextValues();
-  } 
+  }
 }
 
 function clockCalculateNextValues() {

@@ -1,13 +1,13 @@
 var x = document.getElementById("myAudio");
-var soundOn;
+var sound;
 
 chrome.runtime.getBackgroundPage(function (backgroundPage) {
-    soundOn = backgroundPage.soundOn;
+    sound = backgroundPage.pD.sound;
     remind();
 });
 
 function remind() {
-    if (soundOn) {
+    if (sound) {
         playAudio();
     }
 }

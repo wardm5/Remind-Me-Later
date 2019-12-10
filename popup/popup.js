@@ -46,7 +46,9 @@ document.addEventListener('DOMContentLoaded', function() {
   soundButton.addEventListener('click', function() {
       // soundOn = repeatButton.checked;
       data.sound = soundButton.checked;
-
+      chrome.runtime.getBackgroundPage(function (backgroundPage) {
+          backgroundPage.pD.sound = data.sound;
+      });
   }, false);
 
   // start timer button
