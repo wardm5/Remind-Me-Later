@@ -15,3 +15,15 @@ https://www.sanwebe.com/2014/08/css-html-forms-designs
 
 https://codepen.io/rikschennink/pen/lyuaf
     -- another format for clock that looked interesting
+
+https://www.w3schools.com/jsref/prop_checkbox_checked.asp
+    -- helpful resources for checkboxes and getting the value from them
+
+https://www.tutorialrepublic.com/faq/how-to-get-the-value-of-text-input-field-using-javascript.php
+    -- another resources on getting info from input fields
+
+https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_switch
+    -- toggle button example
+
+https://www.w3schools.com/jsref/met_audio_play.asp
+    -- how to play audio

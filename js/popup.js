@@ -7,6 +7,7 @@ var defaultMinutes = 0;
 var defaultSeconds = 5;
 
 var paused = false;
+var soundOn = false;
 
 initializeClock();
 
@@ -27,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // var soundButton = document.getElementById('pauseTimer');
   repeatButton.addEventListener('click', function() {
-      console.log(repeatButton.checked);
+      soundOn = repeatButton.checked;
   }, false);
 
   // start timer button
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
               seconds: defaultSeconds,
               repeat: true,
               paused: paused,
-              soundOn: false
+              soundOn: soundOn
           }
       });
   }, false);
