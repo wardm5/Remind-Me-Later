@@ -51,11 +51,11 @@ Finally, the last assumption is that any running of this program would be with t
 ## Next Steps
 While the Chrome Extension works and meets the critical specifications above, there are some areas of improvement that could be included in the next steps. These are listed below:
 
-**12/8/2019**
+**12/9/2019**
+* Allow for audio noise when alarm goes off
+**TBD**
 * Better input format for reminder timer - one line input
 * Create functionality for multiple reminders
 * Create functionality for repeating or turning off the reminder
-* Allow for audio noise when alarm goes off
 * Updates to the UI of the extension
-* Fix misc. bugs
-*
+* Fix misc. bugs in the program, build tests/testing suite
