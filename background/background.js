@@ -37,16 +37,17 @@ chrome.runtime.onMessage.addListener(
 function myClock() {
   if (!paused) {
       if (hours <= 0 && minutes <= 0 && seconds <= -1 && created) {
-        PopupCenter('/html/reminder.html', 'mywin', 315, 250);
+        PopupCenter('/reminder/reminder.html', 'mywin', 315, 250);
         console.log(soundOn);
+
+        clearInterval(timer);
+        created = false;
         chrome.runtime.sendMessage({
             msg: "sound",
             data: {
                 soundOn: soundOn
             }
         });
-        clearInterval(timer);
-        created = false;
       } else {
           chrome.runtime.sendMessage({
               msg: "updateTime",

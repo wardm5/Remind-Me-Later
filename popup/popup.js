@@ -14,6 +14,8 @@ initializeClock();
 function initializeClock() {
     chrome.runtime.getBackgroundPage(function (backgroundPage) {
         if (backgroundPage.created) {
+            var repeatButton = document.getElementById('soundToggle');
+            repeatButton.checked = backgroundPage.soundOn;
             backgroundPage.start();
         } else {
             setClock(0, 0, 0);
