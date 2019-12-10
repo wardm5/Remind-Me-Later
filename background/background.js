@@ -6,10 +6,21 @@ var created = false;
 var repeat = false;
 var paused = false;
 
-var setHours;
-var setMinutes;
-var setSeconds;
 var soundOn = false;
+
+var dataModel = {
+    remainingHours: 0,
+    remainingMinutes: 0,
+    remainingSeconds: 0,
+
+    setHours: 0,
+    setMinutes: 0,
+    setSeconds: 0,
+
+    sound: false,
+    paused: false,
+    created: false
+}
 
 function start() {
     myClock();   // shows clock
@@ -26,9 +37,7 @@ chrome.runtime.onMessage.addListener(
             seconds = request.data.seconds;
             repeat = request.data.repeat;
             paused = request.data.paused;
-            // console.log(soundOn);
             soundOn = request.data.soundOn;
-            // console.log(soundOn);
             start();
         }
     }
@@ -38,8 +47,6 @@ function myClock() {
   if (!paused) {
       if (hours <= 0 && minutes <= 0 && seconds <= -1 && created) {
         PopupCenter('/reminder/reminder.html', 'mywin', 315, 250);
-        console.log(soundOn);
-
         clearInterval(timer);
         created = false;
         chrome.runtime.sendMessage({
