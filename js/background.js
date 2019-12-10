@@ -8,19 +8,14 @@ var paused = false;
 
 var setHours;
 var setMinutes;
-var seconds;
+var setSeconds;
 var soundOn = false;
 
 function start() {
-    myClock();
-    clearInterval(timer);
-    timer = 0;
-    timer = setInterval(myClock, 1000);
+    myClock();   // shows clock
+    clearInterval(timer);  // clears last timer
+    timer = setInterval(myClock, 1000);  // sets new timer
     created = true;
-}
-
-function pause() {
-  paused = true;
 }
 
 chrome.runtime.onMessage.addListener(
@@ -37,13 +32,12 @@ chrome.runtime.onMessage.addListener(
     }
 );
 
-
-
 function myClock() {
   if (!paused) {
       if (hours <= 0 && minutes <= 0 && seconds <= -1 && created) {
         PopupCenter('/html/reminder.html', 'mywin', 315, 250);
         clearInterval(timer);
+        created = false;
       } else {
           chrome.runtime.sendMessage({
               msg: "updateTime",
@@ -54,16 +48,20 @@ function myClock() {
               }
           });
       }
-      if (minutes <= 0 && hours >= 1 && seconds <= 0) {
-          minutes = 60;
-          hours--;
-      }
-      if (seconds <= 0 && minutes >= 1) {
-          seconds = 60;
-          minutes--;
-      }
-      seconds--;
+      clockCalculateNextValues();
   }
+}
+
+function clockCalculateNextValues() {
+    if (minutes <= 0 && hours >= 1 && seconds <= 0) {
+        minutes = 60;
+        hours--;
+    }
+    if (seconds <= 0 && minutes >= 1) {
+        seconds = 60;
+        minutes--;
+    }
+    seconds--;
 }
 
 function PopupCenter(pageURL, title,w,h) {

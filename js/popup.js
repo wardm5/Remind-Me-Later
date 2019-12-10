@@ -6,6 +6,8 @@ var defaultHours = 0;
 var defaultMinutes = 0;
 var defaultSeconds = 5;
 
+var paused = false;
+
 initializeClock();
 
 function initializeClock() {
@@ -31,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
               minutes: defaultMinutes,
               seconds: defaultSeconds,
               repeat: true,
-              paused: false,
+              paused: paused,
               soundOn: false
           }
       });
