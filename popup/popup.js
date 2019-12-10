@@ -9,6 +9,20 @@ var defaultSeconds = 5;
 var paused = false;
 var soundOn = false;
 
+var data = {
+    remainingHours: 0,
+    remainingMinutes: 0,
+    remainingSeconds: 0,
+
+    setHours: 0,
+    setMinutes: 0,
+    setSeconds: 0,
+
+    sound: false,
+    paused: false,
+    created: false
+}
+
 initializeClock();
 
 function initializeClock() {
@@ -26,11 +40,12 @@ function initializeClock() {
 document.addEventListener('DOMContentLoaded', function() {
   var startTimerButton = document.getElementById('startTimer');
   var pauseTimerButton = document.getElementById('pauseTimer');
-  var repeatButton = document.getElementById('soundToggle');
+  var soundButton = document.getElementById('soundToggle');
 
   // var soundButton = document.getElementById('pauseTimer');
-  repeatButton.addEventListener('click', function() {
+  soundButton.addEventListener('click', function() {
       soundOn = repeatButton.checked;
+      data.sound = soundButton.checked;
   }, false);
 
   // start timer button

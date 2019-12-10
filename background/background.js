@@ -8,7 +8,7 @@ var paused = false;
 
 var soundOn = false;
 
-var dataModel = {
+var data = {
     remainingHours: 0,
     remainingMinutes: 0,
     remainingSeconds: 0,
@@ -32,6 +32,7 @@ function start() {
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.msg === "start") {
+
             hours = request.data.hours;
             minutes = request.data.minutes;
             seconds = request.data.seconds;
