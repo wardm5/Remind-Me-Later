@@ -9,6 +9,7 @@ var paused = false;
 var setHours;
 var setMinutes;
 var seconds;
+var soundOn = false;
 
 function start() {
     myClock();
@@ -21,6 +22,22 @@ function start() {
 function pause() {
   paused = true;
 }
+
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        if (request.msg === "start") {
+            hours = request.data.hours;
+            minutes = request.data.minutes;
+            seconds = request.data.seconds;
+            repeat = request.data.repeat;
+            paused = request.data.paused;
+            soundOn = request.data.sound;
+            start();
+        }
+    }
+);
+
+
 
 function myClock() {
   if (!paused) {

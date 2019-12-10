@@ -24,14 +24,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // start timer button
   startTimerButton.addEventListener('click', function() {
-    chrome.runtime.getBackgroundPage(function (backgroundPage) {
-        backgroundPage.hours = defaultHours;
-        backgroundPage.minutes = defaultMinutes;
-        backgroundPage.seconds = defaultSeconds;
-        backgroundPage.repeat = true;
-        backgroundPage.paused = false;
-        backgroundPage.start();
-    });
+      chrome.runtime.sendMessage({
+          msg: "start",
+          data: {
+              hours: defaultHours,
+              minutes: defaultMinutes,
+              seconds: defaultSeconds,
+              repeat: true,
+              paused: false,
+              soundOn: false
+          }
+      });
   }, false);
 
   // end timer button
