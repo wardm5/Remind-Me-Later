@@ -23,8 +23,12 @@ function initializeClock() {
 document.addEventListener('DOMContentLoaded', function() {
   var startTimerButton = document.getElementById('startTimer');
   var pauseTimerButton = document.getElementById('pauseTimer');
-  var repeatButton = document.getElementById('pauseTimer');
-  var soundButton = document.getElementById('pauseTimer');
+  var repeatButton = document.getElementById('soundToggle');
+
+  // var soundButton = document.getElementById('pauseTimer');
+  repeatButton.addEventListener('click', function() {
+      console.log(repeatButton.checked);
+  }, false);
 
   // start timer button
   startTimerButton.addEventListener('click', function() {
