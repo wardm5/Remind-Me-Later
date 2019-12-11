@@ -9,9 +9,9 @@ var data = {
 
     aH: 0,
     aM: 0,
-    aS: 20,
+    aS: 30,
 
-    repeat: true,
+    repeat: false,
     paused: false
 }
 var created = false;

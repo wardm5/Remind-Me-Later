@@ -34,13 +34,10 @@ var pD = {  // popupData
     repeat: false,
     paused: false
 }
-// 
-// var reminderData = {
-//     reminderHours: 0,
-//     reminderMinutes: 0,
-//     remainderSeconds: 5,
-//     sound: false
-// }
+
+var reminderData = {
+    sound: false
+}
 
 function extensionPopup() {
     popupClock();   // shows clock
@@ -73,12 +70,6 @@ function popupClock() {
       pD.rS = pD.aS;
       clearInterval(timer);
       reminderPopup();
-      // if (pD.repeat) {
-      //     pD.rH = pD.sH;
-      //     pD.rM = pD.sM;
-      //     pD.rS = pD.sS;
-      //     extensionPopup();
-      // }
   } else {
       chrome.runtime.sendMessage({
           msg: "updateTime",
@@ -94,10 +85,6 @@ function reminderClock() {
   if (pD.rH <= 0 && pD.rM <= 0 && pD.rS <= -1) {
       clearInterval(timer);
       reminderWindow.close();
-      // create new method...
-        // start clock for reminder
-        // close window at end of timers
-      // if repeat is on, set remaining seconds, minutes, and hours back to what it was.
       if (pD.repeat) {
           pD.rH = pD.sH;
           pD.rM = pD.sM;
