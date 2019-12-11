@@ -34,13 +34,13 @@ var pD = {  // popupData
     repeat: false,
     paused: false
 }
-
-var reminderData = {
-    reminderHours: 0,
-    reminderMinutes: 0,
-    remainderSeconds: 5,
-    sound: false
-}
+// 
+// var reminderData = {
+//     reminderHours: 0,
+//     reminderMinutes: 0,
+//     remainderSeconds: 5,
+//     sound: false
+// }
 
 function extensionPopup() {
     popupClock();   // shows clock
