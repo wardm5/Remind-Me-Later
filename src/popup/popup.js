@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
   repeatButton.addEventListener('click', function() {
       data.repeat = repeatButton.checked;
       chrome.runtime.getBackgroundPage(function (backgroundPage) {
-          backgroundPage.reminderData.repeat = pd.repeat;
+          backgroundPage.pD.repeat = data.repeat;
       });
   }, false);
 

@@ -59,12 +59,19 @@ chrome.runtime.onMessage.addListener(
 );
 
 function popupClock() {
-  if (pD.rH <= 0 && pD.rM <= 0 && pD.rS <= -1 && (pD.sH > 0 || pD.sM > 0 || pD.sS > 0) && pD.repeat) {
+  if (pD.rH <= 0 && pD.rM <= 0 && pD.rS <= -1 && (pD.sH > 0 || pD.sM > 0 || pD.sS > 0)) {
       PopupCenter('/src/reminder/reminder.html', 'mywin', 315, 250);
       clearInterval(timer);
-  } else if (pD.rH <= 0 && pD.rM <= 0 && pD.rS <= -1 && (pD.sH > 0 || pD.sM > 0 || pD.sS > 0)) {
-      PopupCenter('/src/reminder/reminder.html', 'mywin', 315, 250);
-      clearInterval(timer);
+      // create new method...
+        // start clock for reminder
+        // close window at end of timers
+      // if repeat is on, set remaining seconds, minutes, and hours back to what it was.
+      if (pD.repeat) {
+          pD.rH = pD.sH;
+          pD.rM = pD.sM;
+          pD.rS = pD.sS;
+          start();
+      }
   } else {
       chrome.runtime.sendMessage({
           msg: "updateTime",
