@@ -25,7 +25,7 @@ var reminderData = {
 }
 
 function start() {
-    myClock();   // shows clock
+    popupClock();   // shows clock
     clearInterval(timer);  // clears last timer
     timer = setInterval(myClock, 1000);  // sets new timer
     created = true;
@@ -40,7 +40,7 @@ chrome.runtime.onMessage.addListener(
     }
 );
 
-function myClock() {
+function popupClock() {
   if (pD.rH <= 0 && pD.rM <= 0 && pD.rS <= -1 && (pD.sH > 0 || pD.sM > 0 || pD.sS > 0) && pD.repeat) {
       PopupCenter('/src/reminder/reminder.html', 'mywin', 315, 250);
       clearInterval(timer);
