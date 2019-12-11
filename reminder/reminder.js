@@ -1,8 +1,6 @@
 var x = document.getElementById("myAudio");
 var sound;
 
-
-
 chrome.runtime.getBackgroundPage(function (backgroundPage) {
     sound = backgroundPage.pD.sound;
     remind();

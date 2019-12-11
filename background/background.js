@@ -17,6 +17,13 @@ var pD = {  // popupData
     paused: false
 }
 
+var reminderData = {
+    reminderHours: 0,
+    reminderMinutes: 0,
+    remainderSeconds: 0,
+    remainderSound: false
+}
+
 function start() {
     myClock();   // shows clock
     clearInterval(timer);  // clears last timer

@@ -17,17 +17,9 @@ var data = {
 var created = false;
 
 initializeClock();
-
 function initializeClock() {
     if (created) {
         chrome.runtime.getBackgroundPage(function (backgroundPage) {
-            // if (backgroundPage.created) {
-            //     var repeatButton = document.getElementById('soundToggle');
-            //     repeatButton.checked = backgroundPage.pD.sound;
-            //     backgroundPage.start();
-            // } else {
-            //     setClock(0, 0, 0);
-            // }
             data = backgroundPage.pD;
             setClock(data.rH, data.rM, data.rS);
         });
