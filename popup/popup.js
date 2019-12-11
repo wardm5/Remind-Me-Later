@@ -11,7 +11,6 @@ var data = {
     aM: 0,
     aS: 20,
 
-    sound: false,
     paused: false
 }
 var created = false;

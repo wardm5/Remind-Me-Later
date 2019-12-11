@@ -5,11 +5,25 @@
       <link rel="stylesheet" href="/reminder/clock.css">
     </head>
     <body>
+        <h1>Countdown Clock</h1>
+        <div id="clockdiv">
+            <div>
+                <span class="hours"></span>
+                <div class="smalltext">Hours</div>
+            </div>
+            <div>
+                <span class="minutes"></span>
+                <div class="smalltext">Minutes</div>
+            </div>
+            <div>
+                <span class="seconds"></span>
+                <div class="smalltext">Seconds</div>
+            </div>
+        </div>
         <audio id="myAudio">
           <source src="/audio/bell.mp3" type="audio/mpeg">
           Your browser does not support the audio element.
         </audio>
-        <p>This is your reminder!</p>
         <script src="/reminder/reminder.js"></script>
     </body>
 </html>
