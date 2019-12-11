@@ -32,12 +32,19 @@ document.addEventListener('DOMContentLoaded', function() {
   var startTimerButton = document.getElementById('startTimer');
   var pauseTimerButton = document.getElementById('pauseTimer');
   var soundButton = document.getElementById('soundToggle');
-
+  var repeatButton = document.getElementById('repeatToggle');
   // toggle sound button event
   soundButton.addEventListener('click', function() {
       data.sound = soundButton.checked;
       chrome.runtime.getBackgroundPage(function (backgroundPage) {
           backgroundPage.reminderData.sound = data.sound;
+      });
+  }, false);
+
+  repeatButton.addEventListener('click', function() {
+      data.repeat = repeatButton.checked;
+      chrome.runtime.getBackgroundPage(function (backgroundPage) {
+          backgroundPage.reminderData.repeat = pd.repeat;
       });
   }, false);
 
