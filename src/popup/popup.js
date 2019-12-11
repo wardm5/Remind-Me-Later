@@ -4,7 +4,7 @@ var data = {
     rS: 0,
 
     sH: 0,
-    sM: 1,
+    sM: 0,
     sS: 20,
 
     aH: 0,

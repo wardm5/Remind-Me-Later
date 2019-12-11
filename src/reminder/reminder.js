@@ -1,50 +1,50 @@
 var x = document.getElementById("myAudio");
 var sound;
-var timer;
+// var timer;
 
-var reminderData = {
-    reminderHours: 0,
-    reminderMinutes: 0,
-    remainderSeconds: 0,
-    sound: false
-}
+// var reminderData = {
+//     reminderHours: 0,
+//     reminderMinutes: 0,
+//     remainderSeconds: 0,
+//     sound: false
+// }
 
 // update clock time
-// chrome.runtime.onMessage.addListener(
-//     function(request, sender, sendResponse) {
-//         if (request.msg === "updateTime") {
-//             setClock(request.data.rH, request.data.rM, request.data.rS);
-//         }
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        if (request.msg === "reminderTime") {
+            setClock(request.data.rH, request.data.rM, request.data.rS);
+        }
+    }
+);
+//
+// function start() {
+//     myClock();   // shows clock
+//     clearInterval(timer);  // clears last timer
+//     timer = setInterval(myClock, 1000);  // sets new timer
+//     created = true;
+// }
+
+// function myClock() {
+//     if (reminderData.reminderHours <= 0 && reminderData.reminderMinutes <= 0 && reminderData.remainderSeconds <= -1) {
+//       clearInterval(timer);
+//     } else {
+//       setClock(reminderData.reminderHours, reminderData.reminderMinutes, reminderData.remainderSeconds);
+//       clockCalculateNextValues();
 //     }
-// );
+// }
 
-function start() {
-    myClock();   // shows clock
-    clearInterval(timer);  // clears last timer
-    timer = setInterval(myClock, 1000);  // sets new timer
-    created = true;
-}
-
-function myClock() {
-    if (reminderData.reminderHours <= 0 && reminderData.reminderMinutes <= 0 && reminderData.remainderSeconds <= -1) {
-      clearInterval(timer);
-    } else {
-      setClock(reminderData.reminderHours, reminderData.reminderMinutes, reminderData.remainderSeconds);
-      clockCalculateNextValues();
-    }
-}
-
-function clockCalculateNextValues() {
-    if (reminderData.reminderMinutes <= 0 && reminderData.reminderHours >= 1 && reminderData.remainderSeconds <= 0) {
-        reminderData.reminderMinutes = 60;
-        reminderData.reminderHours--;
-    }
-    if (reminderData.remainderSeconds <= 0 && reminderData.reminderMinutes >= 1) {
-        reminderData.remainderSeconds = 60;
-        reminderData.reminderMinutes--;
-    }
-    reminderData.remainderSeconds--;
-}
+// function clockCalculateNextValues() {
+//     if (reminderData.reminderMinutes <= 0 && reminderData.reminderHours >= 1 && reminderData.remainderSeconds <= 0) {
+//         reminderData.reminderMinutes = 60;
+//         reminderData.reminderHours--;
+//     }
+//     if (reminderData.remainderSeconds <= 0 && reminderData.reminderMinutes >= 1) {
+//         reminderData.remainderSeconds = 60;
+//         reminderData.reminderMinutes--;
+//     }
+//     reminderData.remainderSeconds--;
+// }
 
 function setClock(hours, minutes, seconds) {
     var clock = document.getElementById('clockdiv');
@@ -61,7 +61,7 @@ chrome.runtime.getBackgroundPage(function (backgroundPage) {
     if (reminderData.sound) {
         playAudio();
     }
-    start();
+    // start();
 });
 
 function playAudio() {

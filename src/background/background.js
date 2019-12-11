@@ -1,5 +1,5 @@
 var timer;
-
+var reminderWindow;
 // var remaining = {
 //     hrs: 0,  // remaining hours
 //     mins: 0,  // remaining minutes
@@ -29,7 +29,7 @@ var pD = {  // popupData
 
     aH: 0,  // alarm hours
     aM: 0,  // alarm minutes
-    aS: 20,  // alarm seconds
+    aS: 0,  // alarm seconds
 
     repeat: false,
     paused: false
@@ -49,12 +49,12 @@ function extensionPopup() {
     created = true;
 }
 
-// function reminderPopup() {
-//     reminderClock();   // shows clock
-//     clearInterval(timer);  // clears last timer
-//     timer = setInterval(reminderClock, 1000);  // sets new timer
-//     created = true;
-// }
+function reminderPopup() {
+    reminderClock();   // shows clock
+    clearInterval(timer);  // clears last timer
+    timer = setInterval(reminderClock, 1000);  // sets new timer
+    created = true;
+}
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
@@ -67,9 +67,33 @@ chrome.runtime.onMessage.addListener(
 
 function popupClock() {
   if (pD.rH <= 0 && pD.rM <= 0 && pD.rS <= -1 && (pD.sH > 0 || pD.sM > 0 || pD.sS > 0)) {
-      PopupCenter('/src/reminder/reminder.html', 'mywin', 315, 250);
+      reminderWindow = PopupCenter('/src/reminder/reminder.html', 'mywin', 315, 250);
+      pD.rH = pD.aH;
+      pD.rM = pD.aM;
+      pD.rS = pD.aS;
       clearInterval(timer);
+      reminderPopup();
+      // if (pD.repeat) {
+      //     pD.rH = pD.sH;
+      //     pD.rM = pD.sM;
+      //     pD.rS = pD.sS;
+      //     extensionPopup();
+      // }
+  } else {
+      chrome.runtime.sendMessage({
+          msg: "updateTime",
+          data: pD
+      });
+  }
+  if (!pD.paused) {
+      clockCalculateNextValues();
+  }
+}
 
+function reminderClock() {
+  if (pD.rH <= 0 && pD.rM <= 0 && pD.rS <= -1) {
+      clearInterval(timer);
+      reminderWindow.close();
       // create new method...
         // start clock for reminder
         // close window at end of timers
@@ -82,13 +106,11 @@ function popupClock() {
       }
   } else {
       chrome.runtime.sendMessage({
-          msg: "updateTime",
+          msg: "reminderTime",
           data: pD
       });
   }
-  if (!pD.paused) {
-      clockCalculateNextValues();
-  }
+  clockCalculateNextValues();
 }
 
 function clockCalculateNextValues() {
