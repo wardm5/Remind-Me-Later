@@ -13,6 +13,7 @@ var pD = {  // popupData
     aM: 0,  // alarm minutes
     aS: 20,  // alarm seconds
 
+    repeat: false,
     paused: false
 }
 
@@ -40,21 +41,20 @@ chrome.runtime.onMessage.addListener(
 );
 
 function myClock() {
-  if (pD.rH <= 0 && pD.rM <= 0 && pD.rS <= -1 && (pD.sH > 0 || pD.sM > 0 || pD.sS > 0)) {
-    PopupCenter('/src/reminder/reminder.html', 'mywin', 315, 250);
-    clearInterval(timer);
-    chrome.runtime.sendMessage({
-        msg: "sound",
-        data: reminderData
-    });
+  if (pD.rH <= 0 && pD.rM <= 0 && pD.rS <= -1 && (pD.sH > 0 || pD.sM > 0 || pD.sS > 0) && pD.repeat) {
+      PopupCenter('/src/reminder/reminder.html', 'mywin', 315, 250);
+      clearInterval(timer);
+  } else if (pD.rH <= 0 && pD.rM <= 0 && pD.rS <= -1 && (pD.sH > 0 || pD.sM > 0 || pD.sS > 0)) {
+      PopupCenter('/src/reminder/reminder.html', 'mywin', 315, 250);
+      clearInterval(timer);
   } else {
-     chrome.runtime.sendMessage({
-        msg: "updateTime",
-        data: pD
+      chrome.runtime.sendMessage({
+          msg: "updateTime",
+          data: pD
       });
   }
   if (!pD.paused) {
-    clockCalculateNextValues();
+      clockCalculateNextValues();
   }
 }
 

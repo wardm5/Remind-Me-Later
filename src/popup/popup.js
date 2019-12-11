@@ -11,6 +11,7 @@ var data = {
     aM: 0,
     aS: 20,
 
+    repeat: true,
     paused: false
 }
 var created = false;
@@ -36,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
   soundButton.addEventListener('click', function() {
       data.sound = soundButton.checked;
       chrome.runtime.getBackgroundPage(function (backgroundPage) {
-          // backgroundPage.pD.sound = data.sound;
           backgroundPage.reminderData.sound = data.sound;
       });
   }, false);
