@@ -10,13 +10,13 @@ var reminderData = {
 }
 
 // update clock time
-chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        if (request.msg === "updateTime") {
-            setClock(request.data.rH, request.data.rM, request.data.rS);
-        }
-    }
-);
+// chrome.runtime.onMessage.addListener(
+//     function(request, sender, sendResponse) {
+//         if (request.msg === "updateTime") {
+//             setClock(request.data.rH, request.data.rM, request.data.rS);
+//         }
+//     }
+// );
 
 function start() {
     myClock();   // shows clock
