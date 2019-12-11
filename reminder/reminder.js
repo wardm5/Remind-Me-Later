@@ -1,13 +1,20 @@
 var x = document.getElementById("myAudio");
 var sound;
 
+var reminderData = {
+    reminderHours: 0,
+    reminderMinutes: 0,
+    remainderSeconds: 0,
+    sound: false
+}
+
 chrome.runtime.getBackgroundPage(function (backgroundPage) {
-    sound = backgroundPage.pD.sound;
+    reminderData = backgroundPage.reminderData;
     remind();
 });
 
 function remind() {
-    if (sound) {
+    if (reminderData.sound) {
         playAudio();
     }
 }

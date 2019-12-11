@@ -21,7 +21,7 @@ var reminderData = {
     reminderHours: 0,
     reminderMinutes: 0,
     remainderSeconds: 0,
-    remainderSound: false
+    sound: false
 }
 
 function start() {
@@ -47,9 +47,7 @@ function myClock() {
     debugger;
     chrome.runtime.sendMessage({
         msg: "sound",
-        data: {
-            soundOn: pD.sound
-        }
+        data: reminderData
     });
   } else {
      chrome.runtime.sendMessage({

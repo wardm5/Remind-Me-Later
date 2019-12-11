@@ -37,7 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
   soundButton.addEventListener('click', function() {
       data.sound = soundButton.checked;
       chrome.runtime.getBackgroundPage(function (backgroundPage) {
-          backgroundPage.pD.sound = data.sound;
+          // backgroundPage.pD.sound = data.sound;
+          backgroundPage.reminderData.sound = data.sound;
       });
   }, false);
 
