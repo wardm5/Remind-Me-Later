@@ -39,25 +39,32 @@ var reminderData = {
     sound: false
 }
 
-function extensionPopup() {
-    popupClock();   // shows clock
+function createPopup(clock) {
+    clock;   // shows clock
     clearInterval(timer);  // clears last timer
-    timer = setInterval(popupClock, 1000);  // sets new timer
+    timer = setInterval(clock, 1000);  // sets new timer
     created = true;
 }
 
-function reminderPopup() {
-    reminderClock();   // shows clock
-    clearInterval(timer);  // clears last timer
-    timer = setInterval(reminderClock, 1000);  // sets new timer
-    created = true;
-}
+// function extensionPopup(clock) {
+//     clock;   // shows clock
+//     clearInterval(timer);  // clears last timer
+//     timer = setInterval(clock, 1000);  // sets new timer
+//     created = true;
+// }
+
+// function reminderPopup() {
+//     reminderClock();   // shows clock
+//     clearInterval(timer);  // clears last timer
+//     timer = setInterval(reminderClock, 1000);  // sets new timer
+//     created = true;
+// }
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.msg === "extensionPopup") {
             pD = request.data;
-            extensionPopup();
+            createPopup(popupClock);
         }
     }
 );
@@ -69,7 +76,7 @@ function popupClock() {
       pD.rM = pD.aM;
       pD.rS = pD.aS;
       clearInterval(timer);
-      reminderPopup();
+      createPopup(reminderClock);
   } else {
       chrome.runtime.sendMessage({
           msg: "updateTime",
@@ -89,7 +96,7 @@ function reminderClock() {
           pD.rH = pD.sH;
           pD.rM = pD.sM;
           pD.rS = pD.sS;
-          extensionPopup();
+          createPopup(popupClock);
       }
   } else {
       chrome.runtime.sendMessage({
