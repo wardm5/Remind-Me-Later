@@ -1,6 +1,3 @@
-# Remind-Me-Later
-An google extension for reminding users after X amount of time to stretch.
-
 # Remind-Me-Later Chrome Extension - Misha Ward
 This coding project is designed to create a Chrome Extension that addresses the following requirements from my client:
 

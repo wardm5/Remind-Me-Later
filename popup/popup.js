@@ -14,19 +14,26 @@ var data = {
     sound: false,
     paused: false
 }
+var created = false;
 
 initializeClock();
 
 function initializeClock() {
-    chrome.runtime.getBackgroundPage(function (backgroundPage) {
-        if (backgroundPage.created) {
-            var repeatButton = document.getElementById('soundToggle');
-            repeatButton.checked = backgroundPage.pD.sound;
-            backgroundPage.start();
-        } else {
-            setClock(0, 0, 0);
-        }
-    });
+    if (created) {
+        chrome.runtime.getBackgroundPage(function (backgroundPage) {
+            // if (backgroundPage.created) {
+            //     var repeatButton = document.getElementById('soundToggle');
+            //     repeatButton.checked = backgroundPage.pD.sound;
+            //     backgroundPage.start();
+            // } else {
+            //     setClock(0, 0, 0);
+            // }
+            data = backgroundPage.pD;
+            setClock(data.rH, data.rM, data.rS);
+        });
+    } else {
+        setClock(0, 0, 0);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -57,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
   pauseTimerButton.addEventListener('click', function() {
     chrome.runtime.getBackgroundPage(function (backgroundPage) {
         backgroundPage.pD.paused = !backgroundPage.pD.paused;
+        backgroundPage.myClock();
     });
   }, false);
 }, false);
