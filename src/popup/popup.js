@@ -23,6 +23,7 @@ function initializeClock() {
             data = backgroundPage.pD;
             setClock(data.rH, data.rM, data.rS);
         });
+        console.log(data.repeat);
     } else {
         setClock(0, 0, 0);
     }
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
       data.rM = data.sM;
       data.rH = data.sH;
       chrome.runtime.sendMessage({
-          msg: "start",
+          msg: "extensionPopup",
           data: data
       });
   }, false);
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
   pauseTimerButton.addEventListener('click', function() {
     chrome.runtime.getBackgroundPage(function (backgroundPage) {
         backgroundPage.pD.paused = !backgroundPage.pD.paused;
-        backgroundPage.myClock();
+        backgroundPage.popupClock();
     });
   }, false);
 }, false);

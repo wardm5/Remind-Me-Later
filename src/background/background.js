@@ -1,22 +1,22 @@
 var timer;
 
-var remaining = {
-    hrs: 0,  // remaining hours
-    mins: 0,  // remaining minutes
-    secs: 0,  // remaining seconds
-}
+// var remaining = {
+//     hrs: 0,  // remaining hours
+//     mins: 0,  // remaining minutes
+//     secs: 0,  // remaining seconds
+// }
 
-var set = {
-    hrs: 0,   // set hours
-    mins: 0,  // set minutes
-    secs: 0,  // set seconds
-}
+// var set = {
+//     hrs: 0,   // set hours
+//     mins: 0,  // set minutes
+//     secs: 0,  // set seconds
+// }
 
-var alarm = {
-    hrs: 0,  // alarm hours
-    mins: 0,  // alarm minutes
-    secs: 20,  // alarm seconds
-}
+// var alarm = {
+//     hrs: 0,  // alarm hours
+//     mins: 0,  // alarm minutes
+//     secs: 20,  // alarm seconds
+// }
 
 var pD = {  // popupData
     rH: 0,  // remaining hours
@@ -42,18 +42,25 @@ var reminderData = {
     sound: false
 }
 
-function start() {
+function extensionPopup() {
     popupClock();   // shows clock
     clearInterval(timer);  // clears last timer
     timer = setInterval(popupClock, 1000);  // sets new timer
     created = true;
 }
 
+// function reminderPopup() {
+//     reminderClock();   // shows clock
+//     clearInterval(timer);  // clears last timer
+//     timer = setInterval(reminderClock, 1000);  // sets new timer
+//     created = true;
+// }
+
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        if (request.msg === "start") {
+        if (request.msg === "extensionPopup") {
             pD = request.data;
-            start();
+            extensionPopup();
         }
     }
 );
@@ -62,6 +69,7 @@ function popupClock() {
   if (pD.rH <= 0 && pD.rM <= 0 && pD.rS <= -1 && (pD.sH > 0 || pD.sM > 0 || pD.sS > 0)) {
       PopupCenter('/src/reminder/reminder.html', 'mywin', 315, 250);
       clearInterval(timer);
+
       // create new method...
         // start clock for reminder
         // close window at end of timers
@@ -70,7 +78,7 @@ function popupClock() {
           pD.rH = pD.sH;
           pD.rM = pD.sM;
           pD.rS = pD.sS;
-          start();
+          extensionPopup();
       }
   } else {
       chrome.runtime.sendMessage({
