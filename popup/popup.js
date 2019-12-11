@@ -4,8 +4,8 @@ var data = {
     rS: 0,
 
     sH: 0,
-    sM: 0,
-    sS: 5,
+    sM: 20,
+    sS: 0,
 
     aH: 0,
     aM: 0,

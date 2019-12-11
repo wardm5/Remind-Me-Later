@@ -23,7 +23,6 @@ function myClock() {
       setClock(reminderData.reminderHours, reminderData.reminderMinutes, reminderData.remainderSeconds);
       clockCalculateNextValues();
     }
-
 }
 
 function clockCalculateNextValues() {

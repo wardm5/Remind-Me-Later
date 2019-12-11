@@ -13,7 +13,6 @@ var pD = {  // popupData
     aM: 0,  // alarm minutes
     aS: 20,  // alarm seconds
 
-    sound: false,
     paused: false
 }
 
