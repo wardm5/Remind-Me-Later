@@ -46,20 +46,6 @@ function createPopup(clock) {
     created = true;
 }
 
-// function extensionPopup(clock) {
-//     clock;   // shows clock
-//     clearInterval(timer);  // clears last timer
-//     timer = setInterval(clock, 1000);  // sets new timer
-//     created = true;
-// }
-
-// function reminderPopup() {
-//     reminderClock();   // shows clock
-//     clearInterval(timer);  // clears last timer
-//     timer = setInterval(reminderClock, 1000);  // sets new timer
-//     created = true;
-// }
-
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.msg === "extensionPopup") {
