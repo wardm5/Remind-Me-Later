@@ -1,5 +1,23 @@
 var timer;
 
+var remaining = {
+    hrs: 0,  // remaining hours
+    mins: 0,  // remaining minutes
+    secs: 0,  // remaining seconds
+}
+
+var set = {
+    hrs: 0,   // set hours
+    mins: 0,  // set minutes
+    secs: 0,  // set seconds
+}
+
+var alarm = {
+    hrs: 0,  // alarm hours
+    mins: 0,  // alarm minutes
+    secs: 20,  // alarm seconds
+}
+
 var pD = {  // popupData
     rH: 0,  // remaining hours
     rM: 0,  // remaining minutes
