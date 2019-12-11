@@ -27,7 +27,7 @@ var reminderData = {
 function start() {
     popupClock();   // shows clock
     clearInterval(timer);  // clears last timer
-    timer = setInterval(myClock, 1000);  // sets new timer
+    timer = setInterval(popupClock, 1000);  // sets new timer
     created = true;
 }
 
