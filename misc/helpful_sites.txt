@@ -1,3 +1,7 @@
+--Timer example--
+https://www.google.com/search?q=google+timer
+    Google's timer
+
 --JavaScript--
 https://stackoverflow.com/questions/12265403/passing-message-from-background-js-to-popup-js
     -- provides way to communicate through multiple JavaScript files.
@@ -15,8 +19,13 @@ https://stackoverflow.com/questions/10671174/changing-button-text-onclick
     -- JavaScript to change button's inner HTML value when clicked
 https://stackoverflow.com/questions/14125648/close-popup-window/18894710
     -- Close window with JavaScript
+https://www.w3schools.com/jsref/met_win_close.asp
+    -- another link to help with closing a window with JavaScript
 https://stackoverflow.com/questions/10340481/popup-window-in-chrome-extension
     -- JavaScript to open a popup window in chrome extension
+https://stackoverflow.com/questions/7035842/how-to-change-the-buttons-text-using-javascript
+    -- link describing how to change the button text with JavaScript
+
 
 --Time Out--
 https://stackoverflow.com/questions/452003/cancel-kill-window-settimeout-before-it-happens
@@ -33,3 +42,11 @@ https://www.sanwebe.com/2014/08/css-html-forms-designs
     -- CSS for forms and input to JavaScript
 https://codepen.io/rikschennink/pen/lyuaf
     -- another format for clock that looked interesting
+https://stackoverflow.com/questions/2943548/how-to-reset-remove-chromes-input-highlighting-focus-border
+    remove focus border with css
+https://www.bestcssbuttongenerator.com/#/0
+    button css generator
+
+--GitHub--
+https://help.github.com/en/github/administering-a-repository/renaming-a-repository
+    -- link describing how to rename a repository
