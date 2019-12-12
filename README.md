@@ -1,4 +1,4 @@
-# Remind-Me-Later Chrome Extension - Misha Ward
+# Take-A-Pause Chrome Extension - Misha Ward
 This coding project is designed to create a Chrome Extension that addresses the following requirements from my client:
 
 *  Create a timer for x minutes that alerts the user via a screen popup on chrome
