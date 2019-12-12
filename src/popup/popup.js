@@ -67,8 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
         backgroundPage.popupClock();
     });
     var temp = document.getElementById('pauseTimer').innerHTML;
-    console.log(temp);
-    debugger;
     if (temp == "Start") {
         document.getElementById("pauseTimer").innerHTML= "Stop";
     } else {
