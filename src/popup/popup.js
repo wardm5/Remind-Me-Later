@@ -4,12 +4,12 @@ var data = {
     rS: 0,
 
     sH: 0,
-    sM: 0,
-    sS: 20,
+    sM: 20,
+    sS: 0,
 
     aH: 0,
     aM: 0,
-    aS: 30,
+    aS: 20,
 
     repeat: false,
     paused: false

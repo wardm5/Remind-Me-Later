@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Remind Me Not",
-  "description": "This Chrome Extension will remind you to take a break from the computer",
-  "version": "1.0",
+  "name": "Take A Pause",
+  "description": "This Chrome Extension will remind you to take a pause from the computer after 'x' amount of time.",
+  "version": "0.0.0.1",
   "browser_action": {
       "default_icon": "icons/alarm_icon.png",
       "default_popup": "/src/popup/popup.html"

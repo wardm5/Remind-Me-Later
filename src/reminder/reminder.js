@@ -1,6 +1,20 @@
 var x = document.getElementById("myAudio");
 var sound;
 
+function myFunction() {
+    // alert("Page is loaded");
+    var query = location.search.substring(1);
+    var parameters = {};
+    var keyValues = query.split(/&/);
+    for (var keyValue in keyValues) {
+        var keyValuePairs = keyValue.split(/=/);
+        var key = keyValuePairs[0];
+        var value = keyValuePairs[1];
+        parameters[key] = value;
+    }
+    setClock(parameters.hours, parameters.minutes, parameters.seconds);
+}
+
 // update clock time
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {

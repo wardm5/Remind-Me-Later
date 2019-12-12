@@ -57,10 +57,11 @@ chrome.runtime.onMessage.addListener(
 
 function popupClock() {
   if (pD.rH <= 0 && pD.rM <= 0 && pD.rS <= -1 && (pD.sH > 0 || pD.sM > 0 || pD.sS > 0)) {
-      reminderWindow = PopupCenter('/src/reminder/reminder.html', 'mywin', 315, 250);
       pD.rH = pD.aH;
       pD.rM = pD.aM;
       pD.rS = pD.aS;
+      // window.open('/childwindow.html?yourKey=' + yourValue);
+      reminderWindow = PopupCenter('/src/reminder/reminder.html?hours=' + pD.rH + "&minutes=" + pD.rM + "&seconds=" + pD.rS, 'mywin', 315, 250);
       clearInterval(timer);
       createPopup(reminderClock);
   } else {
@@ -75,22 +76,22 @@ function popupClock() {
 }
 
 function reminderClock() {
-  if (pD.rH <= 0 && pD.rM <= 0 && pD.rS <= -1) {
-      clearInterval(timer);
-      reminderWindow.close();
-      if (pD.repeat) {
-          pD.rH = pD.sH;
-          pD.rM = pD.sM;
-          pD.rS = pD.sS;
-          createPopup(popupClock);
-      }
-  } else {
-      chrome.runtime.sendMessage({
-          msg: "reminderTime",
-          data: pD
-      });
-  }
-  clockCalculateNextValues();
+    if (pD.rH <= 0 && pD.rM <= 0 && pD.rS <= -1) {
+        clearInterval(timer);
+        reminderWindow.close();
+        if (pD.repeat) {
+            pD.rH = pD.sH;
+            pD.rM = pD.sM;
+            pD.rS = pD.sS;
+            createPopup(popupClock);
+        }
+    } else {
+        chrome.runtime.sendMessage({
+            msg: "reminderTime",
+            data: pD
+        });
+    }
+    clockCalculateNextValues();
 }
 
 function clockCalculateNextValues() {
@@ -106,8 +107,9 @@ function clockCalculateNextValues() {
 }
 
 function PopupCenter(pageURL, title,w,h) {
-  var left = (screen.width/2)-(w/2);
-  var top = (screen.height/2)-(h/2);
-  var targetWin = window.open(pageURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
-  return targetWin;
+
+    var left = (screen.width/2)-(w/2);
+    var top = (screen.height/2)-(h/2);
+    var targetWin = window.open(pageURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+    return targetWin;
 }
