@@ -66,6 +66,14 @@ document.addEventListener('DOMContentLoaded', function() {
         backgroundPage.pD.paused = !backgroundPage.pD.paused;
         backgroundPage.popupClock();
     });
+    var temp = document.getElementById('pauseTimer').innerHTML;
+    console.log(temp);
+    debugger;
+    if (temp == "Start") {
+        document.getElementById("pauseTimer").innerHTML= "Stop";
+    } else {
+        document.getElementById("pauseTimer").innerHTML= "Start";
+    }
   }, false);
 }, false);
 
